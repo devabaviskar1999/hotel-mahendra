@@ -5,7 +5,7 @@ const userSchema = new Schema({
         type: String,
         required: true, // This means name is required
         trim: true, // Trim whitespaces
-        lowercase: true, // Automatically convert the email to lowercase
+        unique: true,
       },
     password: {
         type: String,

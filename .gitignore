@@ -7,7 +7,7 @@ frontend/build/
 backend/build/
 
 # Ignore .env files (environment variables)
-.env
+
 
 # Logs
 logs/

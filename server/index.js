@@ -3,9 +3,10 @@ import cors from "cors"          //cross scripting package
 import { config } from "dotenv"   //secret data keys storage
 import connectToMongoDB from "./dbConnection/db.js"
 const app = express()    
+import bodyParser from "body-parser"
 const PORT = process.env.PORT || 4000  //server port
 import userAuth from "./routes/user.js"
-
+import cookieParser from "cookie-parser"
 config();                                //dotenv config   
 connectToMongoDB()
 const corsOptions = {                    //private cors connections
@@ -13,6 +14,8 @@ const corsOptions = {                    //private cors connections
     methods: ["POST", "PUT"],
     allowedHeaders: ["Content-Type"]
 }
+app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(cors(corsOptions))                //cors middleware      
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
