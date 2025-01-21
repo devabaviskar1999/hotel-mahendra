@@ -1,20 +1,19 @@
-.navbar{
-    min-height: 8vh;
-    width: 100vw;
-    border: 2px solid black;
-    font-family:cursive;
+.navbar {
+  min-height: 8vh;
+  width: 100vw;
+  border: 2px solid black;
+  font-family: cursive;
 }
-.navbar .logo{
-    color: orangered;
-    font-weight: bolder;
-    font-size: 1.2rem;
+.navbar .logo {
+  color: orangered;
+  font-weight: bolder;
+  font-size: 1.2rem;
 }
-.navbar nav{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.navbar nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-.navbar nav ul .nav-link{
- margin-left: 20px;
- 
+.navbar nav ul .nav-link {
+  margin-left: 20px;
 }

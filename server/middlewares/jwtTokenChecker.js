@@ -6,12 +6,12 @@ export const jwtTokenChecker = (req, res, next) => {
   try {
     if (token) {
       const checkToken = jwt.verify(token, process.env.JWT_SECRET);
-      if(checkToken){
-        next()
+      if (checkToken) {
+        next();
       }
     }
   } catch (error) {
-    console.log("jwt token invalid")
-    return res.status(400).json({message: "Jwt token invalid!"})
+    console.log("jwt token invalid", error.message);
+    return res.status(400).json({ message: "Jwt token invalid!" });
   }
 };

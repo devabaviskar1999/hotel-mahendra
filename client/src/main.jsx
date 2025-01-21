@@ -1,19 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Signup from './auth/Signup.jsx';
-import Signin from './auth/Signin.jsx';
-import Home from './home/Home.jsx';
-import ProtectiveRoute from './ProtectiveRoute.jsx';
-import Purchased from './nav-component/Purchased.jsx';
-import Sale from './nav-component/Sale.jsx';
-import Stock from './nav-component/Stock.jsx';
-import ModifyStock from './nav-component/Modify-stock.jsx';
-import Logout from './nav-component/Logout.jsx';
+import Signup from "./auth/Signup.jsx";
+import Signin from "./auth/Signin.jsx";
+import Home from "./home/Home.jsx";
+import ProtectiveRoute from "./ProtectiveRoute.jsx";
+import Sale from "./nav-component/Sale.jsx";
+import Stock from "./nav-component/Stock.jsx";
+import ModifyStock from "./nav-component/Modify-stock.jsx";
+import Logout from "./nav-component/Logout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,14 +35,7 @@ const router = createBrowserRouter([
         path: "signup",
         element: <Signup />,
       },
-      {
-        path: "/",
-        element: (
-          <ProtectiveRoute>
-            <Purchased />
-          </ProtectiveRoute>
-        ),
-      },
+
       {
         path: "sale",
         element: (
