@@ -1,0 +1,23 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 10vh;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.footer .first {
+  display: flex;
+  flex-direction: column;
+}
+.footer .first .enquiry {
+  font-weight: bolder;
+  font-size: 1.1rem;
+  color: orangered;
+}
+.footer .second {
+  font-family: cursive;
+}

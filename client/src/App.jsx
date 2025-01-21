@@ -5,19 +5,19 @@ import Footer from "./footer/Footer";
 
 const App = () => {
   return (
-    <div className="relative flex flex-col min-h-screen">
+    <div className="">
       {/* Navbar */}
       <header>
         <Navbar />
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 pt-[120px] pb-[60px]"> {/* Adjusted padding for Navbar/Footer height */}
+      <main className="min-h-[70vh] bg-yellow-400"> {/* Adjusted padding for Navbar/Footer height */}
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer className="w-full bg-gray-800 text-white fixed bottom-0 left-0 z-50">
+      <footer className="">
         <Footer />
       </footer>
     </div>
