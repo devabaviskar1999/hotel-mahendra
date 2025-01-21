@@ -14,52 +14,72 @@ import Sale from './nav-component/Sale.jsx';
 import Stock from './nav-component/Stock.jsx';
 import ModifyStock from './nav-component/Modify-stock.jsx';
 import Logout from './nav-component/Logout.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
       {
-        index:true,
+        index: true,
         element: (
           <ProtectiveRoute>
-            <Home/>
+            <Home />
           </ProtectiveRoute>
-        )
+        ),
       },
       {
         path: "signin",
-        element: <Signin/>,
+        element: <Signin />,
       },
       {
         path: "signup",
         element: <Signup />,
       },
       {
-        path: "purchased",
-        element: <Purchased />,
+        path: "/",
+        element: (
+          <ProtectiveRoute>
+            <Purchased />
+          </ProtectiveRoute>
+        ),
       },
       {
         path: "sale",
-        element: <Sale />,
+        element: (
+          <ProtectiveRoute>
+            <Sale />
+          </ProtectiveRoute>
+        ),
       },
       {
         path: "stock",
-        element: <Stock />,
+        element: (
+          <ProtectiveRoute>
+            <Stock />
+          </ProtectiveRoute>
+        ),
       },
       {
         path: "modify-stock",
-        element: <ModifyStock />,
+        element: (
+          <ProtectiveRoute>
+            <ModifyStock />
+          </ProtectiveRoute>
+        ),
       },
       {
         path: "logout",
-        element: <Logout />,
+        element: (
+          <ProtectiveRoute>
+            <Logout />
+          </ProtectiveRoute>
+        ),
       },
       {
         path: "*", // Catch-all route for undefined paths
         element: <h1>404 - Page Not Found</h1>,
       },
-    
     ],
   },
 ]);

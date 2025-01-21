@@ -1,0 +1,11 @@
+.signin{
+    height: 500px;
+    width: 400px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+}
+.button:hover{
+    background-color: orangered;
+    transition: 0.3s;
+}

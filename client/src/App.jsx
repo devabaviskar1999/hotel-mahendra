@@ -12,12 +12,12 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="min-h-[70vh] bg-yellow-400"> {/* Adjusted padding for Navbar/Footer height */}
+      <main className="min-h-[80vh]  flex flex-col  items-center pt-4"> {/* Adjusted padding for Navbar/Footer height */}
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer className="">
+      <footer className="relative top-1">
         <Footer />
       </footer>
     </div>

@@ -5,6 +5,7 @@ import connectToMongoDB from "./dbConnection/db.js";
 const app = express();
 const PORT = process.env.PORT || 4000; //server port
 import userAuth from "./routes/user.js";
+import product from "./routes/product.js";
 import cookieParser from "cookie-parser";
 config(); //dotenv config
 connectToMongoDB();
@@ -20,4 +21,6 @@ app.use(cors(corsOptions)); //cors middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/auth", userAuth);
+app.use("/product", product);
+
 app.listen(PORT, () => console.log(`Server is listening on port:${PORT}`)); //server is running

@@ -9,7 +9,7 @@ const Navbar = () => {
           Hotel Mahendra <br /> store software
         </Link>
         <ul>
-          <Link to="/purchased" className="nav-link">
+          <Link to="/" className="nav-link">
             Purchasing Item
           </Link>
 
