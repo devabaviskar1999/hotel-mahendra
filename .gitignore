@@ -16,3 +16,5 @@ logs/
 # OS-specific files (optional but useful)
 .DS_Store
 Thumbs.db
+frontend/.env
+backend/.env
