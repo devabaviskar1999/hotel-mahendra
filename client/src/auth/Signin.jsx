@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {config} from "dotenv"
 import "./Signin.css"
+config()
 const Signin = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const navigate = useNavigate();
-
+  const server_url = process.env.SERVER_URL
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/auth/signin", {
+      const response = await axios.post(`${server_url}/auth/signin`, {
         name,
         password,
       }, {withCredentials: true});

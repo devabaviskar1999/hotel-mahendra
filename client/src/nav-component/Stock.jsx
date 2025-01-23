@@ -1,13 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
-
+import { config } from "dotenv";
+config();
 const Stock = () => {
   const [store, setStore] = useState([]);
   const [toggle, setToggle] = useState(false);
-
+  const server_url = process.env.SERVER_URL;
   const getData = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/product/stock", {
+      const response = await axios.get(`${server_url}/product/stock`, {
         withCredentials: true,
       });
       setStore(response.data);
@@ -46,9 +47,15 @@ const Stock = () => {
               <table className="min-w-full table-auto border-collapse border border-gray-300">
                 <thead>
                   <tr className="bg-gray-100">
-                    <th className="border border-gray-300 px-4 py-2">Serial No</th>
-                    <th className="border border-gray-300 px-4 py-2">Product Name</th>
-                    <th className="border border-gray-300 px-4 py-2">Quantity</th>
+                    <th className="border border-gray-300 px-4 py-2">
+                      Serial No
+                    </th>
+                    <th className="border border-gray-300 px-4 py-2">
+                      Product Name
+                    </th>
+                    <th className="border border-gray-300 px-4 py-2">
+                      Quantity
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -79,4 +86,4 @@ const Stock = () => {
   );
 };
 
-export default Stock
+export default Stock;

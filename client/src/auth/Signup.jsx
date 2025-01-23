@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import {config} from "dotenv"
+config()
 const Signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const navigate = useNavigate();
-
+  const server_url = process.env.SERVER_URL
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(password.length <= 5){
@@ -16,7 +17,7 @@ const Signup = () => {
     }
     
     try {
-      const response = await axios.post("http://localhost:4000/auth/signup", {
+      const response = await axios.post(`${server_url}/auth/signup`, {
         name,
         password,
       }, {withCredentials: true});

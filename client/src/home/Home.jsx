@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import {config} from "dotenv"
+config()
 const Home = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState({
@@ -9,7 +10,7 @@ const Home = () => {
     qty:"",
     unit: "",
   });
-
+  const server_url = process.env.SERVER_URL
   const [alertMessage, setAlertMessage] = useState("");
   const [success, setSuccess] = useState({});
 
@@ -30,7 +31,7 @@ const Home = () => {
     const unit = value.unit;
     try {
       const response = await axios.post(
-        "http://localhost:4000/product/purchased",
+        `${server_url}/product/purchased`,
         {
           productName,
           qty,
