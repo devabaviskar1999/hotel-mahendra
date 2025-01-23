@@ -76,6 +76,7 @@ export const sale = async (req, res) => {
 };
 
 export const stock = async (req, res) => {
-  const allStock = await Purchased.find();
-  return res.status(200).send(allStock);
+  const stock = await Purchased.find();
+  console.log("stock", stock)
+  return res.status(200).send(stock);
 };

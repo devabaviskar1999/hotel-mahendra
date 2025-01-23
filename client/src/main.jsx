@@ -12,7 +12,6 @@ import ProtectiveRoute from "./ProtectiveRoute.jsx";
 import Sale from "./nav-component/Sale.jsx";
 import Stock from "./nav-component/Stock.jsx";
 import ModifyStock from "./nav-component/Modify-stock.jsx";
-import Logout from "./nav-component/Logout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,14 +56,6 @@ const router = createBrowserRouter([
         element: (
           <ProtectiveRoute>
             <ModifyStock />
-          </ProtectiveRoute>
-        ),
-      },
-      {
-        path: "logout",
-        element: (
-          <ProtectiveRoute>
-            <Logout />
           </ProtectiveRoute>
         ),
       },

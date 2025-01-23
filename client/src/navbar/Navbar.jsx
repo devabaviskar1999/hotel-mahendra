@@ -1,31 +1,88 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Cookie from "js-cookie";
 import "./Navbar.css";
+import React, { useState } from "react";
+
 const Navbar = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const clearToken = () => {
+    Cookie.remove("token");
+    window.location.reload();
+  };
+
   return (
     <div className="navbar">
       <nav>
         <Link to={"/"} className="logo">
           Hotel Mahendra <br /> store software
         </Link>
-        <ul>
-          <Link to="/" className="nav-link">
+
+        {/* Hamburger button */}
+        <button
+          className="hamburger lg:hidden"
+          onClick={() => setMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          )}
+        </button>
+
+        {/* Menu items */}
+        <ul
+          className={`lg:flex ${isMenuOpen ? "block" : "hidden"} lg:static absolute top-[8vh] left-0 w-full lg:w-auto bg-white lg:bg-transparent lg:flex-row flex-col lg:items-center items-start border lg:border-0`}
+        >
+          <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>
             Purchasing Item
           </Link>
 
-          <Link to="/sale" className="nav-link">
+          <Link to="/sale" className="nav-link" onClick={() => setMenuOpen(false)}>
             Sale
           </Link>
 
-          <Link to="/stock" className="nav-link">
+          <Link to="/stock" className="nav-link" onClick={() => setMenuOpen(false)}>
             Stock
           </Link>
 
-          <Link to="/modify-stock" className="nav-link">
+          <Link to="/modify-stock" className="nav-link" onClick={() => setMenuOpen(false)}>
             Modify Stock
           </Link>
 
-          <Link to="/logout" className="nav-link">
+          <Link
+            className="nav-link bg-red-500 text-white"
+            onClick={() => {
+              clearToken();
+              setMenuOpen(false);
+            }}
+          >
             Logout
           </Link>
         </ul>
@@ -35,107 +92,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-
-// const Navbar = () => {
-//   const [isMenuOpen, setMenuOpen] = useState(false);
-
-//   return (
-//     <div className="fixed w-full bg-orange-600 z-50">
-//       {/* Top Navbar Container */}
-//       <div className="flex items-center justify-between px-8 py-4">
-//         {/* Brand */}
-//         <Link
-//           to="/"
-//           className="text-white text-lg font-bold leading-tight" // Added leading-tight for better spacing
-//         >
-//           Hotel Mahendra <br /> Store Software
-//         </Link>
-
-//         {/* Hamburger Menu Button */}
-//         <button
-//           className="lg:hidden p-2 text-white"
-//           onClick={() => setMenuOpen(!isMenuOpen)}
-//         >
-//           {isMenuOpen ? (
-//             <svg
-//               xmlns="http://www.w3.org/2000/svg"
-//               className="h-6 w-6"
-//               fill="none"
-//               stroke="currentColor"
-//               viewBox="0 0 24 24"
-//               strokeWidth="2"
-//             >
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 d="M6 18L18 6M6 6l12 12"
-//               ></path>
-//             </svg>
-//           ) : (
-//             <svg
-//               xmlns="http://www.w3.org/2000/svg"
-//               className="h-6 w-6"
-//               fill="none"
-//               stroke="currentColor"
-//               viewBox="0 0 24 24"
-//               strokeWidth="2"
-//             >
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 d="M4 6h16M4 12h16M4 18h16"
-//               ></path>
-//             </svg>
-//           )}
-//         </button>
-//       </div>
-
-//       {/* Desktop Links */}
-//       <nav className="hidden lg:flex flex-row items-center w-full bg-yellow-300"> {/* Changed layout for proper centering */}
-//         <ul className="flex space-x-8 py-4"> {/* Added py-4 for vertical spacing */}
-//           <Link to="/purchased" className="text-lg text-white">
-//             Purchasing Item
-//           </Link>
-//           <Link to="/sale" className="text-lg text-white">
-//             Sale
-//           </Link>
-//           <Link to="/stock" className="text-lg text-white">
-//             Stock
-//           </Link>
-//           <Link to="/modify-stock" className="text-lg text-white">
-//             Modify Stock
-//           </Link>
-//           <Link to="/logout" className="text-lg text-white">
-//             Logout
-//           </Link>
-//         </ul>
-//       </nav>
-
-//       {/* Mobile Menu */}
-//       {isMenuOpen && (
-//         <div className="lg:hidden bg-orange-700 text-white flex flex-col items-center space-y-4 py-4">
-//           <Link to="/purchased" onClick={() => setMenuOpen(false)}>
-//             Purchasing Item
-//           </Link>
-//           <Link to="/sale" onClick={() => setMenuOpen(false)}>
-//             Sale
-//           </Link>
-//           <Link to="/stock" onClick={() => setMenuOpen(false)}>
-//             Stock
-//           </Link>
-//           <Link to="/modify-stock" onClick={() => setMenuOpen(false)}>
-//             Modify Stock
-//           </Link>
-//           <Link to="/logout" onClick={() => setMenuOpen(false)}>
-//             Logout
-//           </Link>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Navbar;

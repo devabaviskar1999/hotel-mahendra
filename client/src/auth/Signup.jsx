@@ -43,6 +43,7 @@ const Signup = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              autoComplete="off"  // Disable autocomplete for this field
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
             />
           </div>
@@ -53,6 +54,7 @@ const Signup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              autoComplete="off"  // Disable autocomplete for this field  
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
             />
           </div>

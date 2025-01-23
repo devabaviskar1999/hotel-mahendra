@@ -4,16 +4,58 @@
   border: 2px solid black;
   font-family: cursive;
 }
+
 .navbar .logo {
   color: orangered;
   font-weight: bolder;
   font-size: 1.2rem;
 }
+
 .navbar nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
+.navbar nav ul {
+  display: flex;
+  gap: 20px;
+}
+
 .navbar nav ul .nav-link {
   margin-left: 20px;
+  padding: 4px;
+  border-radius: 20%;
 }
+
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar .logo {
+    font-size: 1rem;
+  }
+
+  .navbar nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid black;
+    display: none; /* Menu hidden by default */
+  }
+
+  .navbar nav ul.block {
+    display: block; /* When the menu is open, make it visible */
+  }
+
+  .navbar nav ul .nav-link {
+    margin: 10px 0;
+  }}
