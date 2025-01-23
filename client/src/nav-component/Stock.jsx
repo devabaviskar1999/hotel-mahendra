@@ -1,11 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import { config } from "dotenv";
-config();
+
 const Stock = () => {
   const [store, setStore] = useState([]);
   const [toggle, setToggle] = useState(false);
-  const server_url = process.env.SERVER_URL;
+  const server_url = import.meta.env.VITE_SERVER_URL
   const getData = async () => {
     try {
       const response = await axios.get(`${server_url}/product/stock`, {
