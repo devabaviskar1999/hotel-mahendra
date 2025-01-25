@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Home = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState({
     productName: "",
-    qty:"",
+    qty: "",
     unit: "",
   });
-  const server_url =import.meta.env.VITE_SERVER_URL
+  const ref = useRef();
+  // const [noItemFound, setItemFound] = useState("");
+  const server_url = import.meta.env.VITE_SERVER_URL;
   const [alertMessage, setAlertMessage] = useState("");
   const [success, setSuccess] = useState({});
 
   const onChanger = (e) => {
+    //!onchanger function
     const { value, name } = e.target;
+
+    console.log("name :", name);
+    console.log("value :", value);
     setValue((prev) => ({
       ...prev,
       [name]: value,
@@ -21,6 +27,7 @@ const Home = () => {
   };
 
   const handleSubmit = async (e) => {
+    //!form handler function
     e.preventDefault();
     setAlertMessage("");
     setSuccess("");
@@ -41,6 +48,7 @@ const Home = () => {
       if (response) {
         setSuccess(response.data);
         setValue({ productName: "", qty: 0, unit: "" });
+        ref.current.focus();
         navigate("/");
       }
     } catch (error) {
@@ -57,6 +65,7 @@ const Home = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <input
+              ref={ref}
               type="text"
               placeholder="Enter product name"
               name="productName"
@@ -97,10 +106,14 @@ const Home = () => {
           </button>
         </form>
         {alertMessage && (
-          <span className="text-red-500 text-center block mt-4">{alertMessage}</span>
+          <span className="text-red-500 text-center block mt-4">
+            {alertMessage}
+          </span>
         )}
         {success.message && (
-          <span className="text-green-500 text-center block mt-4">{success.message}</span>
+          <span className="text-green-500 text-center block mt-4">
+            {success.message}
+          </span>
         )}
       </div>
 

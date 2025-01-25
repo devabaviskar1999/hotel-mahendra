@@ -5,10 +5,11 @@ export const purchased = async (req, res) => {
   if (!productName || !qty || !unit) {
     return res.status(401).json({ message: "invalid input data" });
   }
-  try {
+  try { 
+    const tolower = productName.toLowerCase()
     const productExist = await Purchased.findOne({ productName });
     if (!productExist) {
-      const newProduct = new Purchased({ productName, qty, unit });
+      const newProduct = new Purchased({ productName:tolower, qty, unit });
       await newProduct.save();
       return res.status(201).json({
         message: "Item Added Successfully!",
@@ -43,7 +44,8 @@ export const sale = async (req, res) => {
   }
 
   try {
-    const productExist = await Purchased.findOne({ productName });
+    const productToLower = productName.toLowerCase()
+    const productExist = await Purchased.findOne({ productName: productToLower });
     if (!productExist) {
       return res.status(400).json({
         message: "Product doesn't exist in your stock",
@@ -77,6 +79,44 @@ export const sale = async (req, res) => {
 
 export const stock = async (req, res) => {
   const stock = await Purchased.find();
-  console.log("stock", stock)
-  return res.status(200).send(stock);
+  return res.status(200).json(stock);
 };
+
+export const suggestions = async (req, res) => {
+  const query = req.query.q;
+  if (!query) {
+    return res.status(200).json({message: "No item found"});
+  }
+  try {
+    const result = await Purchased.find({
+      name: { $regex: query, $options: "i" },
+    }).limit(5);
+    
+    // If no result is found, return an empty array
+    if (!result || result.length === 0) {
+      return res.status(200).json([]);
+    }
+    
+    return res.status(200).json(result);
+  } catch (error) {
+    res.status(500).send("Server error");
+  }
+};
+
+export const emptyStock = async (req, res) => {
+  try {
+    // Use MongoDB query to find products with qty = 0
+    const emptyStock = await Purchased.find({ qty: 0 });
+
+    if (emptyStock.length === 0) {
+      return res.status(200).json({ message: "No empty stock available." });
+    }
+
+    return res.status(200).json(emptyStock); // Return the filtered products
+  } catch (error) {
+    console.error("Error fetching empty stock:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+

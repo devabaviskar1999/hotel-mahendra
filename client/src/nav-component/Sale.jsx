@@ -10,7 +10,7 @@ const Sale = () => {
     unit: "",
     employee: "",
   });
-
+  
   const [alertMessage, setAlertMessage] = useState("");
   const [success, setSuccess] = useState({});
   const server_url = import.meta.env.VITE_SERVER_URL
@@ -133,7 +133,7 @@ const Sale = () => {
               <span className="text-amber-700 font-semibold">
                 {success.productName}
               </span>{" "}
-              sold.
+              in stock
             </li>
           </ul>
         </div>
