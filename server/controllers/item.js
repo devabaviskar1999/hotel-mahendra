@@ -85,12 +85,12 @@ export const stock = async (req, res) => {
 export const suggestions = async (req, res) => {
   const query = req.query.q;
   if (!query) {
-    return res.status(200).json({message: "No item found"});
+    return res.status(200).json({message: "No user input found"});
   }
   try {
     const result = await Purchased.find({
-      name: { $regex: query, $options: "i" },
-    }).limit(5);
+      productName: { $regex: query, $options: "i" },
+    }).limit(2);
     
     // If no result is found, return an empty array
     if (!result || result.length === 0) {

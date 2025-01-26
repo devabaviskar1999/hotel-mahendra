@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import debounce from "lodash.debounce";
 const Home = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState({
@@ -8,18 +9,34 @@ const Home = () => {
     qty: "",
     unit: "",
   });
-  const ref = useRef();
   // const [noItemFound, setItemFound] = useState("");
   const server_url = import.meta.env.VITE_SERVER_URL;
   const [alertMessage, setAlertMessage] = useState("");
   const [success, setSuccess] = useState({});
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const ref = useRef();
+  const fetchSuggestions = async (suggestionsValue) => {
+    const { data } = await axios(
+      `${server_url}/product/suggestions?q=${suggestionsValue}`,
+      { withCredentials: true }
+    );
+    setSuggestions(data);
+  };
+  console.log(suggestions);
+  const debouncedFetch = useCallback(debounce(fetchSuggestions, 300), []);
 
   const onChanger = (e) => {
     //!onchanger function
     const { value, name } = e.target;
+    if (name === "productName") {
+      if (value.trim().length > 0) {
+        debouncedFetch(value);
+      } else {
+        setSuggestions([]);
+      }
+    }
 
-    console.log("name :", name);
-    console.log("value :", value);
     setValue((prev) => ({
       ...prev,
       [name]: value,
@@ -63,7 +80,7 @@ const Home = () => {
 
       <div className="form-div bg-white p-6 rounded-lg shadow-lg w-full sm:w-96">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <div className="relative">
             <input
               ref={ref}
               type="text"
@@ -74,7 +91,27 @@ const Home = () => {
               onChange={onChanger}
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
+            {suggestions.length > 0 && (
+              <ul className="absolute left-0 top-full w-full bg-white border border-gray-300 rounded-md shadow-lg z-50 max-h-40 overflow-y-auto">
+                {suggestions.map((item) => (
+                  <li
+                    key={item._id}
+                    className="p-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      setValue((prev) => ({
+                        ...prev,
+                        productName: item.productName,
+                      }));
+                      setSuggestions([]); // Clear suggestions on select
+                    }}
+                  >
+                    {item.productName}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
           <div>
             <input
               type="number"
